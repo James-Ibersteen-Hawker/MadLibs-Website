@@ -32,6 +32,7 @@ function prompter() {
     }*/
 
 //bg gen
+// window.addEventListener("resize", (window.location = "index.html"));
 function setRandomOffset() {
   let questions = document.querySelectorAll(".question");
   Array.from(questions);
