@@ -44,19 +44,50 @@ function setRandomOffset() {
 
 function waterFallReset() {
   let subDivs = document.querySelectorAll(".subdiv");
+  for (let i = 0; i < subDivs.length; i++) {
+    subDivs[i].id = `subDiv${i}`;
+  }
   let bHeight = window.innerHeight;
   let style = document.createElement("style");
   style.type = "text/css";
+  let offset = subDivs.length / 2;
   for (let i = 0; i < subDivs.length; i++) {
+    console.log(bHeight - subDivs[0].getBoundingClientRect().top);
     let Keyframes = `@keyframes waterFall${i} {
       0% {
-          top: ${subDivs[i].}
+          top: 0;
+          opacity: 1;
+      }
+      56% {
+          top: ${bHeight}px;
+          opacity: 1;
+      }
+      57% {
+          top: ${bHeight}px;
+          opacity: 0;
+      }
+      58% {
+          top: -${subDivs[i].getBoundingClientRect().top * 2}px;
+          opacity: 0;
+      }
+      59% {
+          top: -${subDivs[i].getBoundingClientRect().top * 2}px;
+          opacity: 1;
       }
       100% {
-      
+          top: -1px;
+          opacity: 1;
       }
-    }`
+    }`;
+    subDivs[i].setAttribute(
+      "style",
+      `animation-name: waterFall${i}; animation-duration: 2s; animation-iteration-count: infinite; animation-timing-function: linear; animation-delay: ${offset}s;`
+    );
+    style.append(Keyframes);
+    offset = offset - 0.5;
   }
+  let head = document.getElementsByTagName("HEAD")[0];
+  head.append(style);
 }
 
 function log(arg) {
@@ -73,9 +104,15 @@ function questionBG() {
     let instance = results[1];
     height = height + subDiv.offsetHeight - 70;
     let random = Math.round(Math.random() * 50);
+    let random2 = Math.round(Math.random() * 100);
     let sign;
     Math.random() > 0.5 ? (sign = 1) : (sign = -1);
-    subDiv.setAttribute("style", `margin-left: ${random * sign}px;`);
+    let sign2;
+    Math.random() > 0.5 ? (sign2 = 1) : (sign2 = -1);
+    subDiv.setAttribute(
+      "style",
+      `margin-left: ${random * sign}px; margin-top: ${random2 * sign2}px;`
+    );
   }
   setRandomOffset();
   waterFallReset();
