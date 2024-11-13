@@ -12,6 +12,9 @@
 // }
 //IT CAN TALK!!!!!!!!!!!!!!!!!!!
 
+//broccoli cheddar soup story idea
+let fConsole = document.getElementById("no-console");
+
 window.onload = function startUp() {
   questionBG();
 };
@@ -25,14 +28,7 @@ function prompter() {
   document.getElementById("story").innerHTML = myStory;
 }
 
-/*.question {
-      animation-name: fadeInOut;
-      animation-duration: 5s;
-      animation-iteration-count: infinite;
-    }*/
-
 //bg gen
-// window.addEventListener("resize", (window.location = "index.html"));
 function setRandomOffset() {
   let questions = document.querySelectorAll(".question");
   Array.from(questions);
@@ -44,6 +40,27 @@ function setRandomOffset() {
       }s;`
     );
   }
+}
+
+function waterFallReset() {
+  let subDivs = document.querySelectorAll(".subdiv");
+  let bHeight = window.innerHeight;
+  let style = document.createElement("style");
+  style.type = "text/css";
+  for (let i = 0; i < subDivs.length; i++) {
+    let Keyframes = `@keyframes waterFall${i} {
+      0% {
+          top: ${subDivs[i].}
+      }
+      100% {
+      
+      }
+    }`
+  }
+}
+
+function log(arg) {
+  fConsole.textContent = arg;
 }
 
 function questionBG() {
@@ -61,6 +78,7 @@ function questionBG() {
     subDiv.setAttribute("style", `margin-left: ${random * sign}px;`);
   }
   setRandomOffset();
+  waterFallReset();
 }
 
 function _row() {
