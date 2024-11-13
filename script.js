@@ -14,7 +14,6 @@
 
 window.onload = function startUp() {
   questionBG();
-  setRandomOffset();
 };
 
 function prompter() {
@@ -60,6 +59,7 @@ function questionBG() {
     Math.random() > 0.5 ? (sign = 1) : (sign = -1);
     subDiv.setAttribute("style", `margin-left: ${random * sign}px;`);
   }
+  setRandomOffset();
 }
 
 function _row() {
