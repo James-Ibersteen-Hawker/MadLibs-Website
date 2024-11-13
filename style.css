@@ -1,0 +1,76 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  background: rgb(255, 192, 156);
+}
+
+.question {
+  background-color: white;
+  width: 150px;
+  height: 156px;
+  mask-image: url(imgs/question.png);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  background-repeat: no-repeat;
+}
+
+#bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  .subdiv {
+    display: flex;
+    margin-top: -80px;
+  }
+  .subdiv:first-child {
+    margin-top: 0;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  10% {
+    opacity: 0.8;
+    transform: scale(0.2);
+  }
+  20% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  30% {
+    opacity: 0.7;
+    transform: scale(0.3);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.4);
+  }
+  60% {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+  70% {
+    opacity: 0.1;
+    transform: scale(0.5);
+  }
+  80% {
+    opacity: 0.4;
+    transform: scale(0.1);
+  }
+  90% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
