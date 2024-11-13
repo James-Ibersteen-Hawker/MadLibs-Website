@@ -16,7 +16,7 @@
 let fConsole = document.getElementById("no-console");
 
 window.onload = function startUp() {
-  questionBG();
+  // questionBG();
 };
 
 function prompter() {
@@ -28,7 +28,7 @@ function prompter() {
   document.getElementById("story").innerHTML = myStory;
 }
 
-//bg gen
+//bg gen open
 function setRandomOffset() {
   let questions = document.querySelectorAll(".question");
   Array.from(questions);
@@ -142,3 +142,4 @@ function _question(width) {
   question.setAttribute("style", `transform: scale(${width}%)`);
   return question;
 }
+//bg gen close
