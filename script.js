@@ -16,7 +16,8 @@
 let fConsole = document.getElementById("no-console");
 
 window.onload = function startUp() {
-  questionBG();
+  questionBG(false);
+  set();
   ellipsis();
 };
 
@@ -95,7 +96,7 @@ function log(arg) {
   fConsole.textContent = arg;
 }
 
-function questionBG() {
+function questionBG(anim) {
   let bHeight = window.innerHeight;
   let bg = document.getElementById("bg");
   let height = 0;
@@ -110,13 +111,12 @@ function questionBG() {
     Math.random() > 0.5 ? (sign = 1) : (sign = -1);
     let sign2;
     Math.random() > 0.5 ? (sign2 = 1) : (sign2 = -1);
-    subDiv.setAttribute(
-      "style",
-      `margin-left: ${random * sign}px; margin-top: ${random2 * sign2}px;`
-    );
+    subDiv.setAttribute("style", `margin-left: ${random * sign}px;`);
   }
-  setRandomOffset();
-  waterFallReset();
+  if (anim == true) {
+    setRandomOffset();
+    waterFallReset();
+  }
 }
 
 function _row() {
@@ -153,6 +153,17 @@ function ellipsis() {
   let i = 0;
   setTimeout(
     () => {
+      text = text;
+      initial.textContent = text;
+      i = i + 1;
+    },
+    500,
+    text,
+    initial,
+    i
+  );
+  setTimeout(
+    () => {
       text = text + ".";
       initial.textContent = text;
       i = i + 1;
@@ -168,7 +179,7 @@ function ellipsis() {
       initial.textContent = text;
       i = i + 1;
     },
-    2000,
+    1500,
     text,
     initial,
     i
@@ -180,7 +191,7 @@ function ellipsis() {
       i = i + 1;
       ellipsis();
     },
-    3000,
+    2000,
     text,
     initial,
     i
@@ -188,5 +199,6 @@ function ellipsis() {
 }
 
 function set() {
-  
+  let initializing = document.getElementById("initializing");
+  initializing.classList.add("d-none");
 }
