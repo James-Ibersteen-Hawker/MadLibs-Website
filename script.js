@@ -16,7 +16,8 @@
 let fConsole = document.getElementById("no-console");
 
 window.onload = function startUp() {
-  // questionBG();
+  questionBG();
+  ellipsis();
 };
 
 function prompter() {
@@ -143,3 +144,45 @@ function _question(width) {
   return question;
 }
 //bg gen close
+
+function initialize() {}
+
+function ellipsis() {
+  let initial = document.getElementById("InP");
+  let text = "Initializing";
+  let i = 0;
+  setTimeout(
+    () => {
+      text = text + ".";
+      initial.textContent = text;
+      i = i + 1;
+    },
+    1000,
+    text,
+    initial,
+    i
+  );
+  setTimeout(
+    () => {
+      text = text + ".";
+      initial.textContent = text;
+      i = i + 1;
+    },
+    2000,
+    text,
+    initial,
+    i
+  );
+  setTimeout(
+    () => {
+      text = text + ".";
+      initial.textContent = text;
+      i = i + 1;
+      ellipsis();
+    },
+    3000,
+    text,
+    initial,
+    i
+  );
+}
