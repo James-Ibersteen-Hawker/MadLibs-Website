@@ -23,11 +23,16 @@
     <div id="bg"></div>
     <div id="no-console"></div>
     <div class="container-fluid">
-      <main id="opening">
-        <h1>MadLibs</h1>
-        <div class="button"></div>
+      <main id="opening" class="d-none">
+        <h1 class="d-none d-sm-block">MadLibs</h1>
+        <h1 class="d-block d-sm-none">Mad<br />Libs</h1>
+        <div class="button" onclick="toStories()">
+          <div class="triangle"></div>
+        </div>
       </main>
-      <main id="stories"></main>
+      <main id="stories">
+        <h1>Stories</h1>
+      </main>
       <div id="content"></div>
     </div>
 

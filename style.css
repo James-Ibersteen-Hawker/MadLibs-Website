@@ -14,6 +14,7 @@ body {
   background: rgb(255, 192, 156);
   --peach: rgb(255, 192, 156);
   --shadow: rgb(182, 110, 110);
+  --red: rgb(255, 72, 72);
 }
 
 /*BG open*/
@@ -110,6 +111,7 @@ h1 {
   font-size: 7em;
   padding: 20px;
   color: rgb(68, 17, 5);
+  overflow-wrap: anywhere;
 }
 
 /*initializing open*/
@@ -172,7 +174,7 @@ h1 {
   width: 100%;
   height: 100%;
   background: rgb(255, 197, 155);
-  border: 30px double rgb(255, 72, 72);
+  border: 30px double var(--red);
   font-family: Raleway, sans-serif;
   font-size: 50px;
 }
@@ -185,26 +187,91 @@ h1 {
   background-color: rgb(255, 197, 155);
   box-shadow: 0px 0px 5px rgb(255, 174, 174), 0px 0px 10px var(--shadow) inset,
     0px 0px 10px var(--shadow);
-  border: 30px double rgb(255, 72, 72);
+  border: 30px double var(--red);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#stories {
+  width: 80%;
+  height: 90%;
+  background-color: rgb(255, 197, 155);
+  box-shadow: 0px 0px 5px rgb(255, 174, 174), 0px 0px 10px var(--shadow) inset,
+    0px 0px 10px var(--shadow);
+  border: 30px double var(--red);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50px;
+  padding: 20px;
+  box-sizing: border-box;
+  h1 {
+    font-size: 5em;
+  }
+}
+#stories {
+  
 }
 
 .button {
-  width: 100px;
+  cursor: pointer;
+  height: 120px;
   aspect-ratio: 1/1;
-  background: green;
   border-radius: 50%;
+  background: var(--peach);
   position: relative;
+  box-shadow: 0px 0px 10px var(--shadow);
+  .triangle {
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 50px solid var(--red);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-33%, -50%);
+  }
 }
 
-.button::before {
+.button::after {
   position: absolute;
   top: 0;
   left: 0;
+  content: "";
   width: 100%;
   height: 100%;
+  border: 10px outset rgb(255, 174, 174);
+  border-radius: 50%;
+  /* box-shadow: 0px 0px 10px var(--shadow) inset; */
+  transition: 0.5s;
+}
+
+.button:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
+  box-shadow: 0px 0px 20px var(--shadow);
+}
+
+.button:hover::after {
+  transform: rotate(540deg);
+  transition: 0.8s;
+}
+
+.button:active::after {
+  transform: rotate(450deg);
+  transition: 0.2s;
+}
+
+.button:active {
+  box-shadow: 0px 0px 15px var(--shadow);
+  transition: 0.2s;
 }

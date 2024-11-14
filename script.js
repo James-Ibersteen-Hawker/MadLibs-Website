@@ -203,3 +203,41 @@ function set() {
   initializing.classList.add("d-none");
   let opening = document.getElementById("opening");
 }
+
+function toStories() {
+  let open = document.getElementById("opening");
+  let stories = document.getElementById("stories");
+  let style = document.createElement("style");
+  let head = document.getElementsByTagName("HEAD")[0];
+  let fClass = `.slideOut {
+    animation-name: out1;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards:
+  }`;
+  let anim = `@keyframes out1 {
+    0% {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    100% {
+      left: -${open.offsetWidth + open.getBoundingClientRect().left * 2}px;
+      top: 50%;
+      transform: translate(0,-50%);
+    }
+  }`;
+  style.append(fClass);
+  style.append(anim);
+  head.append(style);
+  open.classList.add("slideOut");
+  window.setTimeout(
+    () => {
+      open.classList.add("d-none");
+      open.classList.remove("slideOut");
+    },
+    2000,
+    open
+  );
+}
