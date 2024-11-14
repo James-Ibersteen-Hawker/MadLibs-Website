@@ -18,8 +18,12 @@ let fConsole = document.getElementById("no-console");
 window.onload = function startUp() {
   questionBG(false);
   set();
-  ellipsis();
+  ellipsis("Initializing");
 };
+
+function log(arg) {
+  fConsole.textContent = arg;
+}
 
 function prompter() {
   let userName = prompt("What is your name?");
@@ -30,7 +34,9 @@ function prompter() {
   document.getElementById("story").innerHTML = myStory;
 }
 
+///////////////////////////////////////////////////////////////
 //bg gen open
+
 function setRandomOffset() {
   let questions = document.querySelectorAll(".question");
   Array.from(questions);
@@ -43,15 +49,13 @@ function setRandomOffset() {
     );
   }
 }
-
 function waterFallReset() {
   let subDivs = document.querySelectorAll(".subdiv");
   for (let i = 0; i < subDivs.length; i++) {
     subDivs[i].id = `subDiv${i}`;
   }
   let bHeight = window.innerHeight;
-  let style = document.createElement("style");
-  style.type = "text/css";
+  let style = document.getElementsByTagName("STYLE")[0];
   let offset = subDivs.length / 2;
   for (let i = 0; i < subDivs.length; i++) {
     console.log(bHeight - subDivs[0].getBoundingClientRect().top);
@@ -91,11 +95,6 @@ function waterFallReset() {
   let head = document.getElementsByTagName("HEAD")[0];
   head.append(style);
 }
-
-function log(arg) {
-  fConsole.textContent = arg;
-}
-
 function questionBG(anim) {
   let bHeight = window.innerHeight;
   let bg = document.getElementById("bg");
@@ -118,7 +117,6 @@ function questionBG(anim) {
     waterFallReset();
   }
 }
-
 function _row() {
   let questions = [];
   let bWidth = document.body.offsetWidth;
@@ -136,20 +134,23 @@ function _row() {
   }
   return [subdiv, questions];
 }
-
 function _question(width) {
   let question = document.createElement("div");
   question.classList.add("question");
   question.setAttribute("style", `transform: scale(${width}%)`);
   return question;
 }
+
 //bg gen close
+///////////////////////////////////////////////////////////////
+//screens functions open
 
-function initialize() {}
-
-function ellipsis() {
+function initialize() {
+  ellipsis("Initializing");
+}
+function ellipsis(arg) {
   let initial = document.getElementById("InP");
-  let text = "Initializing";
+  let text = arg;
   let i = 0;
   setTimeout(
     () => {
@@ -197,17 +198,15 @@ function ellipsis() {
     i
   );
 }
-
 function set() {
   let initializing = document.getElementById("initializing");
   initializing.classList.add("d-none");
   let opening = document.getElementById("opening");
 }
-
 function toStories() {
   let open = document.getElementById("opening");
   let stories = document.getElementById("stories");
-  let style = document.createElement("style");
+  let style = document.getElementsByTagName("STYLE")[0];
   let head = document.getElementsByTagName("HEAD")[0];
   let fClass = `.slideOut {
     animation-name: out1;
@@ -215,7 +214,16 @@ function toStories() {
     animation-iteration-count: 1;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards:
-  }`;
+  }
+  .slideIn {
+    transform-origin: 0% 0%;
+    animation-name: in1;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards:
+  }  
+  `;
   let anim = `@keyframes out1 {
     0% {
       left: 50%;
@@ -227,17 +235,36 @@ function toStories() {
       top: 50%;
       transform: translate(0,-50%);
     }
+  }
+  @keyframes in1 {
+    0% {
+      left: 50%;
+      top: 50%;
+      transform: scale(0.7) translate(-50%, -50%);
+    }
+    100% {
+      left: 50%;
+      top: 50%;
+      transform: scale(1) translate(-50%, -50%);
+    }
   }`;
   style.append(fClass);
   style.append(anim);
   head.append(style);
   open.classList.add("slideOut");
+  open.setAttribute("style", "pointer-events: none;");
+  stories.classList.add("slideIn");
   window.setTimeout(
     () => {
       open.classList.add("d-none");
       open.classList.remove("slideOut");
+      stories.classList.remove("slideIn");
     },
     2000,
-    open
+    open,
+    stories
   );
 }
+
+//screens functions close
+///////////////////////////////////////////////////////////////

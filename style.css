@@ -177,6 +177,8 @@ h1 {
   border: 30px double var(--red);
   font-family: Raleway, sans-serif;
   font-size: 50px;
+  z-index: 10;
+  transform-origin: center;
 }
 
 /*initializing close*/
@@ -213,14 +215,25 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50px;
-  padding: 20px;
+  padding: 5px;
+  padding-bottom: 20px;
   box-sizing: border-box;
+  transform-origin: 0% 0%;
   h1 {
     font-size: 5em;
   }
-}
-#stories {
-  
+  .row {
+    border-top: 10px double var(--red);
+    padding: 20px;
+    height: 83%;
+    overflow-y: auto;
+    scrollbar-width: 0;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+  .row::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 }
 
 .button {
@@ -274,4 +287,15 @@ h1 {
 .button:active {
   box-shadow: 0px 0px 15px var(--shadow);
   transition: 0.2s;
+}
+
+.card {
+  aspect-ratio: 1/1;
+  .card-title {
+    text-align: center;
+  }
+  .card-img-top {
+    height: 75%;
+    object-fit: cover;
+  }
 }

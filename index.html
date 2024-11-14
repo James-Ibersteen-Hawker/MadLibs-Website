@@ -17,27 +17,82 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+    <style></style>
   </head>
 
   <body>
     <div id="bg"></div>
     <div id="no-console"></div>
     <div class="container-fluid">
-      <main id="opening" class="d-none">
+      <main id="opening" class="z-3">
         <h1 class="d-none d-sm-block">MadLibs</h1>
         <h1 class="d-block d-sm-none">Mad<br />Libs</h1>
         <div class="button" onclick="toStories()">
           <div class="triangle"></div>
         </div>
       </main>
-      <main id="stories">
+      <main id="stories" class="z-2">
         <h1>Stories</h1>
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3 mb-3">
+            <div class="card">
+              <img
+                class="card-img-top img-fluid"
+                src="imgs/brocc-cheddar-soup.jpg"
+                alt="Title"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Broccoli Cheddar Soup</h4>
+                <p class="card-text">Text</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 mb-3">
+            <div class="card">
+              <img
+                class="card-img-top img-fluid"
+                src="imgs/aircraft.jpeg"
+                alt="Title"
+              />
+              <div class="card-body">
+                <h4 class="card-title">In-flight Announcement</h4>
+                <p class="card-text">Text</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 mb-3">
+            <div class="card">
+              <img
+                class="card-img-top img-fluid"
+                src="imgs/conference room.jpg"
+                alt="Title"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Job Interview</h4>
+                <p class="card-text">Text</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3 mb-3">
+            <div class="card">
+              <img
+                class="card-img-top img-fluid"
+                src="imgs/olympics.jpg"
+                alt="Title"
+              />
+              <div class="card-body">
+                <h4 class="card-title">Olympic Reporter</h4>
+                <p class="card-text">Text</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
-      <div id="content"></div>
+      <div id="content" class="z-1"></div>
     </div>
 
     <div class="extras">
-      <div id="initializing">
+      <div id="initializing" class="z-5">
         <p id="InP">Initializing</p>
         <div id="loading"></div>
       </div>
