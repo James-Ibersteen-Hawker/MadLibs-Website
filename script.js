@@ -16,7 +16,7 @@
 let fConsole = document.getElementById("no-console");
 
 window.onload = function startUp() {
-  questionBG(false);
+  questionBG(true);
   set();
   ellipsis();
 };
@@ -201,4 +201,6 @@ function ellipsis() {
 function set() {
   let initializing = document.getElementById("initializing");
   initializing.classList.add("d-none");
+  let opening = document.getElementById("opening");
+  
 }
