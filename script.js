@@ -12,26 +12,69 @@
 // }
 //IT CAN TALK!!!!!!!!!!!!!!!!!!!
 
-//broccoli cheddar soup story idea
+let words = {
+  1: "noun",
+  2: "verb",
+  3: "adverb",
+  4: "adjective",
+  5: "number",
+  6: "place name",
+  7: "verb ending in -ing",
+  8: "plural noun",
+  9: "-est adjective",
+  10: "place name",
+  11: "name",
+  12: "facial feature",
+};
+
+let annArr = [
+  words[8],
+  words[9],
+  words[5],
+  words[6],
+  words[6],
+  words[7],
+  words[4],
+  words[11],
+  words[8],
+  words[4],
+  words[1],
+  "airplane manufacturer name",
+  "three digit number",
+  words[5],
+  words[5],
+  words[5],
+  words[8],
+  words[5],
+  words[12],
+];
+
+let announcementText = `Hello, dear ${annArr[0]}! It is our ${annArr[1]} pleasure to welcome you aboard Flight ${annArr[2]}, from ${annArr[3]} to ${annArr[4]}. We will be ${annArr[5]} on our ${annArr[6]} Flagship Airplane, the ${annArr[7]}. Now pay attention as our ${annArr[8]} will go through a ${annArr[9]} safety ${annArr[10]}. We are currently on board a ${annArr[11]} ${annArr[12]}. There are ${annArr[13]} exits on board. ${annArr[14]} by the tail, ${annArr[15]} over the ${annArr[16]}, and ${annArr[17]} by the ${annArr[18]}. In the case of an emergency, please do not (present tense verb). (Adverb) make your way to the nearest exit, and leave all of your (plural noun) behind. The (noun) opens by (verb ending in ing) on the top and bottom (plural noun). Inflatable (plural noun) will extend, and you may dismount the (noun). In the case of a (noun) landing, inflatable (same noun) will open and will (air-related verb) life rafts. Underneath your seat there is also a life jacket, which you can (verb) by (verb ending in ing) into the tube, or pulling on the (noun). Infants have a special life jacket. Remember to always (verb) yourself before (same verb) others. There is a safety brochure in the back of the (noun) in front of you. We (present tense verb) you for (verb ending in ing) to fly (airline name).`;
+
 let fConsole = document.getElementById("no-console");
 
 window.onload = function startUp() {
   questionBG(false);
   set();
   ellipsis("Initializing");
+  prompter(annArr, announcementText);
+};
+
+let article = function (item) {
+  let vowels = ["a", "e", "i", "o", "u"];
+  let art;
+  vowels.includes(item[0]) ? (art = "an") : (art = "a");
+  return art;
 };
 
 function log(arg) {
   fConsole.textContent = arg;
 }
 
-function prompter() {
-  let userName = prompt("What is your name?");
-  let userQuest = prompt("What is your quest?");
-  let userFavColor = prompt("What is your favorite color?");
-  let swallowAirSpeed = prompt("What is the airspeed of an unladen swallow?");
-  let myStory = `<p>Hello ${userName}. Answer me these questions three, and the other side you'll see.</p><p>Your quest is to ${userQuest}</p>`;
-  document.getElementById("story").innerHTML = myStory;
+function prompter(inputArr, story) {
+  for (let i = 0; i < inputArr.length; i++) {
+    prompt(`Please enter ${article(inputArr[i])} ${inputArr[i]}`);
+  }
 }
 
 ///////////////////////////////////////////////////////////////
