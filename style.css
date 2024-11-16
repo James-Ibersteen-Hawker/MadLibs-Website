@@ -360,9 +360,10 @@ h1 {
 }
 
 #prompt {
+  transform-origin: center center;
   position: fixed;
   aspect-ratio: 3/2;
-  background: green;
+  opacity: 0;
   z-index: 6;
   top: 50%;
   left: 50%;
@@ -402,10 +403,21 @@ h1 {
   }
 }
 
-.zoomIn_prompts {
-
+.zoomIn_prompt {
+  animation-name: zoomIn_prompts;
+  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
 }
 
 @keyframes zoomIn_prompts {
-  
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
