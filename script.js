@@ -80,8 +80,8 @@ let fConsole = document.getElementById("no-console");
 window.onload = function startUp() {
   questionBG(false);
   set();
-  ellipsis("Initializing");
-  prompter(annArr, announcementText);
+  // ellipsis("Initializing");
+  // prompter(annArr, announcementText);
 };
 
 let article = function (item) {
@@ -95,14 +95,16 @@ function log(arg) {
   fConsole.textContent = arg;
 }
 
-function prompter(inputArr, story) {
-  let output = [];
-  for (let i = 0; i < inputArr.length; i++) {
-    output.push(prompt(`Please enter ${article(inputArr[i])} ${inputArr[i]}`));
-  }
-  let storyBox = documen.getElementById("stories");
-  storyBox.innerHTML = `<h1>${story[1]}</h1><p>${story[0]}</p>`;
+function prompter() {
+  let prompt = document.getElementById("prompt");
+  prompt.classList.remove("d-none");
+  prompt.classList.add("zoomIn_prompt");
+  document.getElementById("header").textContent = "hi";
 }
+
+function entered() {}
+
+function submit() {}
 
 ///////////////////////////////////////////////////////////////
 //bg gen open
@@ -216,6 +218,30 @@ function _question(width) {
 //screens functions open
 
 function initialize() {
+  let initialize = document.getElementById("initializing");
+  initialize.classList.remove("d-none");
+  initialize.classList.add("fadeIn_initialize");
+  let subDivs = document.querySelectorAll(".subdiv");
+  let tOffset = subDivs.length / 2;
+  setRandomOffset();
+  waterFallReset();
+  setTimeout(
+    () => {
+      initialize.classList.remove("fadeIn_initialize");
+      initialize.classList.add("fadeOut_initialize");
+      setTimeout(
+        () => {
+          initialize.classList.remove("fadeOut_initialize");
+          initialize.classList.add("d-none");
+          prompter();
+        },
+        500,
+        initialize
+      );
+    },
+    tOffset * 1000,
+    initialize
+  );
   ellipsis("Initializing");
 }
 function ellipsis(arg) {
@@ -260,7 +286,7 @@ function ellipsis(arg) {
       text = text + ".";
       initial.textContent = text;
       i = i + 1;
-      ellipsis();
+      ellipsis("Initializing");
     },
     2000,
     text,
@@ -271,7 +297,8 @@ function ellipsis(arg) {
 function set() {
   let initializing = document.getElementById("initializing");
   initializing.classList.add("d-none");
-  let opening = document.getElementById("opening");
+  let prompt = document.getElementById("prompt");
+  prompt.classList.add("d-none");
 }
 function toStories() {
   let open = document.getElementById("opening");
@@ -342,5 +369,9 @@ function toStories() {
 function go(pick) {
   switch (pick) {
     case "ann":
+      initialize();
+      let content = document.getElementById("content");
+      let menu = document.getElementById("stories");
+      menu.classList.add("d-none");
   }
 }

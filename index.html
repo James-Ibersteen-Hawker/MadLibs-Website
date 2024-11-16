@@ -51,7 +51,7 @@
               <img
                 class="card-img-top img-fluid"
                 src="imgs/aircraft.jpeg"
-                alt="Title"
+                alt="Boarding Announcement"
               />
               <div class="card-body">
                 <h4 class="card-title">Announcement</h4>
@@ -85,14 +85,21 @@
         </div>
       </main>
       <div id="content" class="z-1"></div>
-    </div>
-
-    <div class="extras">
-      <div id="initializing" class="z-5">
-        <p id="InP">Initializing</p>
-        <div id="loading"></div>
+      <div class="extras">
+        <div id="initializing" class="z-5">
+          <p id="InP">Initializing</p>
+          <div id="loading"></div>
+        </div>
+        <div class="row">
+          <div id="prompt" class="col-4">
+            <h1 id="header">Hello</h1>
+            <div class="inputs">
+              <input type="text" id="textInp" />
+              <input type="submit" id="submit" onclick="entered()" />
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="prompt"></div>
     </div>
 
     <!-- Bootstrap JavaScript Libraries -->
