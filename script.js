@@ -27,6 +27,8 @@ let words = {
   12: "facial feature",
 };
 
+/////////////////////////////////////////// announcement madLib /////////////////////////////////////////////
+
 let annArr = [
   words[8],
   words[9],
@@ -47,9 +49,31 @@ let annArr = [
   words[8],
   words[5],
   words[12],
+  "present tense verb",
+  words[3],
+  words[8],
+  words[1],
+  words[7],
+  words[8],
+  words[8],
+  words[1],
+  words[1],
+  "air-related verb",
+  "present tense verb",
+  words[7],
+  words[1],
+  words[2],
+  words[1],
+  "present tense verb",
+  words[7],
+  "airline name",
+];
+let announcementText = [
+  `Hello, dear ${annArr[0]}! It is our ${annArr[1]} pleasure to welcome you aboard Flight ${annArr[2]}, from ${annArr[3]} to ${annArr[4]}. We will be ${annArr[5]} on our ${annArr[6]} Flagship Airplane, the ${annArr[7]}. Now pay attention as our ${annArr[8]} will go through a ${annArr[9]} safety ${annArr[10]}. We are currently on board a ${annArr[11]} ${annArr[12]}. There are ${annArr[13]} exits on board. ${annArr[14]} by the tail, ${annArr[15]} over the ${annArr[16]}, and ${annArr[17]} by the ${annArr[18]}. In the case of an emergency, please do not ${annArr[19]}. ${annArr[20]} make your way to the nearest exit, and leave all of your ${annArr[21]} behind. The ${annArr[22]} opens by ${annArr[23]} on the top and bottom ${annArr[24]}. Inflatable ${annArr[25]} will extend, and you may dismount the ${annArr[26]}. In the case of a ${annArr[27]} landing, inflatable ${annArr[26]} will open and will ${annArr[28]} life rafts. Underneath your seat there is also a life jacket, which you can ${annArr[29]} by ${annArr[30]} into the tube, or pulling on the ${annArr[31]}. Infants have a special life jacket. Remember to always ${annArr[32]} yourself before ${annArr[32]}ing others. There is a safety brochure in the back of the ${annArr[33]} in front of you. We ${annArr[34]} you for ${annArr[35]} to fly ${annArr[36]}.`,
+  "Boarding Safety Announcement",
 ];
 
-let announcementText = `Hello, dear ${annArr[0]}! It is our ${annArr[1]} pleasure to welcome you aboard Flight ${annArr[2]}, from ${annArr[3]} to ${annArr[4]}. We will be ${annArr[5]} on our ${annArr[6]} Flagship Airplane, the ${annArr[7]}. Now pay attention as our ${annArr[8]} will go through a ${annArr[9]} safety ${annArr[10]}. We are currently on board a ${annArr[11]} ${annArr[12]}. There are ${annArr[13]} exits on board. ${annArr[14]} by the tail, ${annArr[15]} over the ${annArr[16]}, and ${annArr[17]} by the ${annArr[18]}. In the case of an emergency, please do not (present tense verb). (Adverb) make your way to the nearest exit, and leave all of your (plural noun) behind. The (noun) opens by (verb ending in ing) on the top and bottom (plural noun). Inflatable (plural noun) will extend, and you may dismount the (noun). In the case of a (noun) landing, inflatable (same noun) will open and will (air-related verb) life rafts. Underneath your seat there is also a life jacket, which you can (verb) by (verb ending in ing) into the tube, or pulling on the (noun). Infants have a special life jacket. Remember to always (verb) yourself before (same verb) others. There is a safety brochure in the back of the (noun) in front of you. We (present tense verb) you for (verb ending in ing) to fly (airline name).`;
+/////////////////////////////////////////// Job Interview madLib /////////////////////////////////////////////
 
 let fConsole = document.getElementById("no-console");
 
@@ -72,9 +96,12 @@ function log(arg) {
 }
 
 function prompter(inputArr, story) {
+  let output = [];
   for (let i = 0; i < inputArr.length; i++) {
-    prompt(`Please enter ${article(inputArr[i])} ${inputArr[i]}`);
+    output.push(prompt(`Please enter ${article(inputArr[i])} ${inputArr[i]}`));
   }
+  let storyBox = documen.getElementById("stories");
+  storyBox.innerHTML = `<h1>${story[1]}</h1><p>${story[0]}</p>`;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -311,3 +338,9 @@ function toStories() {
 
 //screens functions close
 ///////////////////////////////////////////////////////////////
+
+function go(pick) {
+  switch (pick) {
+    case "ann":
+  }
+}
