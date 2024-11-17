@@ -12,6 +12,12 @@
 // }
 //IT CAN TALK!!!!!!!!!!!!!!!!!!!
 
+let index = 0;
+let cStory;
+let cArr;
+let output = [];
+let choice;
+
 let words = {
   1: "noun",
   2: "verb",
@@ -26,9 +32,6 @@ let words = {
   11: "name",
   12: "facial feature",
 };
-
-/////////////////////////////////////////// announcement madLib /////////////////////////////////////////////
-
 let annArr = [
   words[8],
   words[9],
@@ -68,12 +71,6 @@ let annArr = [
   words[7],
   "airline name",
 ];
-let announcementText = [
-  `Hello, dear ${annArr[0]}! It is our ${annArr[1]} pleasure to welcome you aboard Flight ${annArr[2]}, from ${annArr[3]} to ${annArr[4]}. We will be ${annArr[5]} on our ${annArr[6]} Flagship Airplane, the ${annArr[7]}. Now pay attention as our ${annArr[8]} will go through a ${annArr[9]} safety ${annArr[10]}. We are currently on board a ${annArr[11]} ${annArr[12]}. There are ${annArr[13]} exits on board. ${annArr[14]} by the tail, ${annArr[15]} over the ${annArr[16]}, and ${annArr[17]} by the ${annArr[18]}. In the case of an emergency, please do not ${annArr[19]}. ${annArr[20]} make your way to the nearest exit, and leave all of your ${annArr[21]} behind. The ${annArr[22]} opens by ${annArr[23]} on the top and bottom ${annArr[24]}. Inflatable ${annArr[25]} will extend, and you may dismount the ${annArr[26]}. In the case of a ${annArr[27]} landing, inflatable ${annArr[26]} will open and will ${annArr[28]} life rafts. Underneath your seat there is also a life jacket, which you can ${annArr[29]} by ${annArr[30]} into the tube, or pulling on the ${annArr[31]}. Infants have a special life jacket. Remember to always ${annArr[32]} yourself before ${annArr[32]}ing others. There is a safety brochure in the back of the ${annArr[33]} in front of you. We ${annArr[34]} you for ${annArr[35]} to fly ${annArr[36]}.`,
-  "Boarding Safety Announcement",
-];
-
-/////////////////////////////////////////// Job Interview madLib /////////////////////////////////////////////
 
 let fConsole = document.getElementById("no-console");
 
@@ -83,32 +80,41 @@ window.onload = function startUp() {
   // ellipsis("Initializing");
   // prompter(annArr, announcementText);
 };
-
 let article = function (item) {
   let vowels = ["a", "e", "i", "o", "u"];
   let art;
   vowels.includes(item[0]) ? (art = "an") : (art = "a");
   return art;
 };
-
 function log(arg) {
   fConsole.textContent = arg;
 }
-
-function prompter() {
-  let prompt = document.getElementById("prompt");
-  prompt.classList.remove("d-none");
-  prompt.classList.add("zoomIn_prompt");
-  document.getElementById("header").textContent = "hi";
+function prompter(index) {
+  document.getElementById("header").textContent = `Please enter ${article(
+    cArr[index]
+  )} ${cArr[index]}`;
+  document.getElementById("textInp").value = "";
 }
-
-function entered() {}
-
-function submit() {}
-
+function entered() {
+  let value = document.getElementById("textInp").value;
+  output.push(value.toString());
+  index++;
+  showUp();
+}
+function showUp() {
+  let prompt = document.getElementById("prompt");
+  prompt.classList.add("leave");
+  setTimeout(
+    () => {
+      prompt.classList.add("d-none");
+      prompt.classList.remove("leave");
+      openPrompt();
+    },
+    1000,
+    prompt
+  );
+}
 ///////////////////////////////////////////////////////////////
-//bg gen open
-
 function setRandomOffset() {
   let questions = document.querySelectorAll(".question");
   Array.from(questions);
@@ -130,7 +136,6 @@ function waterFallReset() {
   let style = document.getElementsByTagName("STYLE")[0];
   let offset = subDivs.length / 2;
   for (let i = 0; i < subDivs.length; i++) {
-    console.log(bHeight - subDivs[0].getBoundingClientRect().top);
     let Keyframes = `@keyframes waterFall${i} {
       0% {
           top: 0;
@@ -212,10 +217,26 @@ function _question(width) {
   question.setAttribute("style", `transform: scale(${width}%)`);
   return question;
 }
-
-//bg gen close
+function openPrompt() {
+  let prompt = document.getElementById("prompt");
+  prompt.classList.remove("d-none");
+  prompt.classList.add("zoomIn_prompt");
+  setTimeout(
+    () => {
+      prompt.classList.remove("zoomIn_prompt");
+      prompt.setAttribute("style", "opacity: 1;");
+    },
+    500,
+    prompt
+  );
+  if (index < cArr.length) {
+    prompter(index);
+  } else {
+    compile();
+    return;
+  }
+}
 ///////////////////////////////////////////////////////////////
-//screens functions open
 
 function initialize() {
   let initialize = document.getElementById("initializing");
@@ -233,7 +254,7 @@ function initialize() {
         () => {
           initialize.classList.remove("fadeOut_initialize");
           initialize.classList.add("d-none");
-          prompter();
+          openPrompt();
         },
         500,
         initialize
@@ -286,7 +307,7 @@ function ellipsis(arg) {
       text = text + ".";
       initial.textContent = text;
       i = i + 1;
-      ellipsis("Initializing");
+      ellipsis(arg);
     },
     2000,
     text,
@@ -362,16 +383,73 @@ function toStories() {
     stories
   );
 }
-
-//screens functions close
 ///////////////////////////////////////////////////////////////
-
 function go(pick) {
   switch (pick) {
     case "ann":
       initialize();
-      let content = document.getElementById("content");
       let menu = document.getElementById("stories");
       menu.classList.add("d-none");
+      cArr = annArr;
+      choice = "ann";
+      break;
   }
+}
+
+function compilingInitialize() {
+  console.log("still compiling!");
+  let initialize = document.getElementById("initializing");
+  let InP = document.getElementById("InP");
+  InP.textContent = "Compiling Responses";
+  initialize.classList.remove("d-none");
+  initialize.classList.add("fadeIn_initialize");
+  let subDivs = document.querySelectorAll(".subdiv");
+  let tOffset = subDivs.length / 2;
+  questionBG();
+  setTimeout(
+    () => {
+      initialize.classList.remove("fadeIn_initialize");
+      initialize.classList.add("fadeOut_initialize");
+      setTimeout(
+        () => {
+          initialize.classList.remove("fadeOut_initialize");
+          initialize.classList.add("d-none");
+          set();
+        },
+        500,
+        initialize
+      );
+    },
+    tOffset * 1000,
+    initialize
+  );
+  ellipsis("Compiling Responses");
+}
+
+function compile() {
+  console.log("compiling");
+  index = 0;
+  compilingInitialize();
+  let story;
+  console.log(choice);
+  switch (choice) {
+    case choice == "ann":
+      cArr = undefined;
+      story = [
+        `Hello, dear ${output[0]}! It is our ${output[1]} pleasure to welcome you aboard Flight ${output[2]}, from ${output[3]} to ${output[4]}. We will be ${output[5]} on our ${output[6]} Flagship Airplane, the ${output[7]}. Now pay attention as our ${output[8]} will go through a ${annArr[9]} safety ${output[10]}. We are currently on board a ${output[11]} ${output[12]}. There are ${output[13]} exits on board. ${output[14]} by the tail, ${output[15]} over the ${output[16]}, and ${output[17]} by the ${output[18]}. In the case of an emergency, please do not ${output[19]}. ${output[20]} make your way to the nearest exit, and leave all of your ${output[21]} behind. The ${output[22]} opens by ${output[23]} on the top and bottom ${output[24]}. Inflatable ${output[25]} will extend, and you may dismount the ${output[26]}. In the case of a ${output[27]} landing, inflatable ${output[26]} will open and will ${output[28]} life rafts. Underneath your seat there is also a life jacket, which you can ${output[29]} by ${output[30]} into the tube, or pulling on the ${output[31]}. Infants have a special life jacket. Remember to always ${output[32]} yourself before ${output[32]}ing others. There is a safety brochure in the back of the ${output[33]} in front of you. We ${output[34]} you for ${output[35]} to fly ${output[36]}.`,
+        "Boarding Safety Announcement",
+      ];
+      loadContent(story);
+  }
+  output = [];
+  console.log(annArr, output, story);
+}
+
+function loadContent(story) {
+  console.log("loading content");
+  let content = document.getElementById("content");
+  content.innerText = story[0];
+  let h1 = document.createElement("h1");
+  h1.textContent = story[1];
+  content.insertAdjacentHTML("afterbegin", h1);
 }
