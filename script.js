@@ -433,7 +433,7 @@ function compile() {
   let story;
   console.log(choice);
   switch (choice) {
-    case choice == "ann":
+    case "ann":
       cArr = undefined;
       story = [
         `Hello, dear ${output[0]}! It is our ${output[1]} pleasure to welcome you aboard Flight ${output[2]}, from ${output[3]} to ${output[4]}. We will be ${output[5]} on our ${output[6]} Flagship Airplane, the ${output[7]}. Now pay attention as our ${output[8]} will go through a ${annArr[9]} safety ${output[10]}. We are currently on board a ${output[11]} ${output[12]}. There are ${output[13]} exits on board. ${output[14]} by the tail, ${output[15]} over the ${output[16]}, and ${output[17]} by the ${output[18]}. In the case of an emergency, please do not ${output[19]}. ${output[20]} make your way to the nearest exit, and leave all of your ${output[21]} behind. The ${output[22]} opens by ${output[23]} on the top and bottom ${output[24]}. Inflatable ${output[25]} will extend, and you may dismount the ${output[26]}. In the case of a ${output[27]} landing, inflatable ${output[26]} will open and will ${output[28]} life rafts. Underneath your seat there is also a life jacket, which you can ${output[29]} by ${output[30]} into the tube, or pulling on the ${output[31]}. Infants have a special life jacket. Remember to always ${output[32]} yourself before ${output[32]}ing others. There is a safety brochure in the back of the ${output[33]} in front of you. We ${output[34]} you for ${output[35]} to fly ${output[36]}.`,
