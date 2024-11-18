@@ -17,6 +17,7 @@ let cStory;
 let cArr;
 let output = [];
 let choice;
+let alertOver = false;
 
 let words = {
   1: "noun",
@@ -90,6 +91,7 @@ function log(arg) {
   fConsole.textContent = arg;
 }
 function prompter(index) {
+  console.log("prompting");
   document.getElementById("header").textContent = `Please enter ${article(
     cArr[index]
   )} ${cArr[index]}`;
@@ -239,6 +241,8 @@ function openPrompt() {
 ///////////////////////////////////////////////////////////////
 
 function initialize() {
+  alertOver = false;
+  console.log("initializing");
   let initialize = document.getElementById("initializing");
   initialize.classList.remove("d-none");
   initialize.classList.add("fadeIn_initialize");
@@ -255,6 +259,8 @@ function initialize() {
           initialize.classList.remove("fadeOut_initialize");
           initialize.classList.add("d-none");
           openPrompt();
+          alertOver = true;
+          return;
         },
         500,
         initialize
@@ -266,54 +272,58 @@ function initialize() {
   ellipsis("Initializing");
 }
 function ellipsis(arg) {
-  let initial = document.getElementById("InP");
-  let text = arg;
-  let i = 0;
-  setTimeout(
-    () => {
-      text = text;
-      initial.textContent = text;
-      i = i + 1;
-    },
-    500,
-    text,
-    initial,
-    i
-  );
-  setTimeout(
-    () => {
-      text = text + ".";
-      initial.textContent = text;
-      i = i + 1;
-    },
-    1000,
-    text,
-    initial,
-    i
-  );
-  setTimeout(
-    () => {
-      text = text + ".";
-      initial.textContent = text;
-      i = i + 1;
-    },
-    1500,
-    text,
-    initial,
-    i
-  );
-  setTimeout(
-    () => {
-      text = text + ".";
-      initial.textContent = text;
-      i = i + 1;
-      ellipsis(arg);
-    },
-    2000,
-    text,
-    initial,
-    i
-  );
+  if (alertOver == true) {
+    return;
+  } else {
+    let initial = document.getElementById("InP");
+    let text = arg;
+    let i = 0;
+    setTimeout(
+      () => {
+        text = text;
+        initial.textContent = text;
+        i = i + 1;
+      },
+      500,
+      text,
+      initial,
+      i
+    );
+    setTimeout(
+      () => {
+        text = text + ".";
+        initial.textContent = text;
+        i = i + 1;
+      },
+      1000,
+      text,
+      initial,
+      i
+    );
+    setTimeout(
+      () => {
+        text = text + ".";
+        initial.textContent = text;
+        i = i + 1;
+      },
+      1500,
+      text,
+      initial,
+      i
+    );
+    setTimeout(
+      () => {
+        text = text + ".";
+        initial.textContent = text;
+        i = i + 1;
+        ellipsis(arg);
+      },
+      2000,
+      text,
+      initial,
+      i
+    );
+  }
 }
 function set() {
   let initializing = document.getElementById("initializing");
@@ -395,8 +405,8 @@ function go(pick) {
       break;
   }
 }
-
 function compilingInitialize() {
+  alertOver = false;
   console.log("still compiling!");
   let initialize = document.getElementById("initializing");
   let InP = document.getElementById("InP");
@@ -404,7 +414,7 @@ function compilingInitialize() {
   initialize.classList.remove("d-none");
   initialize.classList.add("fadeIn_initialize");
   let subDivs = document.querySelectorAll(".subdiv");
-  let tOffset = subDivs.length / 2;
+  let tOffset = subDivs.length / 4;
   questionBG();
   setTimeout(
     () => {
@@ -413,8 +423,9 @@ function compilingInitialize() {
       setTimeout(
         () => {
           initialize.classList.remove("fadeOut_initialize");
-          initialize.classList.add("d-none");
           set();
+          initialize.classList.add("d-none");
+          alertOver = true;
         },
         500,
         initialize
@@ -425,10 +436,10 @@ function compilingInitialize() {
   );
   ellipsis("Compiling Responses");
 }
-
 function compile() {
   console.log("compiling");
   index = 0;
+  questionBG();
   compilingInitialize();
   let story;
   console.log(choice);
@@ -444,7 +455,6 @@ function compile() {
   output = [];
   console.log(annArr, output, story);
 }
-
 function loadContent(story) {
   console.log("loading content");
   let content = document.getElementById("content");
