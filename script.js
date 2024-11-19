@@ -1,3 +1,4 @@
+"use strict";
 //source found, js SpeechSynthesisUtterance MDN, https://dev.to/devsmitra/convert-text-to-speech-in-javascript-using-speech-synthesis-api-223g
 // function speak() {
 //   // Create a SpeechSynthesisUtterance
@@ -18,7 +19,7 @@ let cArr;
 let output = [];
 let choice;
 let alertOver = false;
-
+let promptOpen = false;
 let words = {
   1: "noun",
   2: "verb",
@@ -72,9 +73,14 @@ let annArr = [
   words[7],
   "airline name",
 ];
-
 let fConsole = document.getElementById("no-console");
-
+window.addEventListener("keyup", function (event) {
+  if (event.key == "Enter" || event.keyCode == 13) {
+    if (cArr && promptOpen == true) {
+      entered();
+    }
+  }
+});
 window.onload = function startUp() {
   questionBG(false);
   set();
@@ -91,13 +97,18 @@ function log(arg) {
   fConsole.textContent = arg;
 }
 function prompter(index) {
+  promptOpen = true;
   console.log("prompting");
   document.getElementById("header").textContent = `Please enter ${article(
     cArr[index]
   )} ${cArr[index]}`;
   document.getElementById("textInp").value = "";
+  document.getElementById("counter").innerText = `${index + 1} / ${
+    cArr.length
+  }`;
 }
 function entered() {
+  promptOpen = false;
   let value = document.getElementById("textInp").value;
   output.push(value.toString());
   index++;
