@@ -1,17 +1,5 @@
 "use strict";
 //source found, js SpeechSynthesisUtterance MDN, https://dev.to/devsmitra/convert-text-to-speech-in-javascript-using-speech-synthesis-api-223g
-// function speak() {
-//   // Create a SpeechSynthesisUtterance
-//   const utterance = new SpeechSynthesisUtterance("Welcome to this tutorial!");
-
-//   // Select a voice
-//   const voices = speechSynthesis.getVoices();
-//   utterance.voice = voices[0]; // Choose a specific voice
-
-//   // Speak the text
-//   speechSynthesis.speak(utterance);
-// }
-//IT CAN TALK!!!!!!!!!!!!!!!!!!!
 
 let index = 0;
 let cStory;
@@ -54,7 +42,7 @@ let annArr = [
   words[8],
   words[5],
   words[12],
-  "present tense verb",
+  words[2],
   words[3],
   words[8],
   words[1],
@@ -64,15 +52,16 @@ let annArr = [
   words[1],
   words[1],
   "air-related verb",
-  "present tense verb",
+  words[2],
   words[7],
   words[1],
   words[2],
   words[1],
-  "present tense verb",
+  words[2],
   words[7],
   "airline name",
 ];
+let brocArr = [words[1], words[2], words[3], words[4], words[1], words[5]];
 let fConsole = document.getElementById("no-console");
 window.addEventListener("keyup", function (event) {
   if (event.key == "Enter" || event.keyCode == 13) {
@@ -84,6 +73,8 @@ window.addEventListener("keyup", function (event) {
 window.onload = function startUp() {
   questionBG(false);
   set();
+  let content = document.getElementById("content");
+  content.classList.add("d-none");
   // ellipsis("Initializing");
   // prompter(annArr, announcementText);
 };
@@ -244,10 +235,19 @@ function openPrompt() {
   );
   if (index < cArr.length) {
     prompter(index);
+    progressor(index);
   } else {
     compile();
     return;
   }
+}
+function progressor(dist) {
+  let progress = document.getElementById("progress");
+  progress.classList.remove("d-none");
+  let width = 100;
+  let unit = width / cArr.length;
+  let progressor = document.getElementById("progressor");
+  progressor.setAttribute("style", `left: -${100 - unit * dist}%;`);
 }
 ///////////////////////////////////////////////////////////////
 
@@ -270,6 +270,7 @@ function initialize() {
           initialize.classList.remove("fadeOut_initialize");
           initialize.classList.add("d-none");
           openPrompt();
+          progressor(index);
           alertOver = true;
           return;
         },
@@ -341,6 +342,8 @@ function set() {
   initializing.classList.add("d-none");
   let prompt = document.getElementById("prompt");
   prompt.classList.add("d-none");
+  let progress = document.getElementById("progress");
+  progress.classList.add("d-none");
 }
 function toStories() {
   let open = document.getElementById("opening");
@@ -406,13 +409,19 @@ function toStories() {
 }
 ///////////////////////////////////////////////////////////////
 function go(pick) {
+  let menu = document.getElementById("stories");
   switch (pick) {
     case "ann":
       initialize();
-      let menu = document.getElementById("stories");
       menu.classList.add("d-none");
       cArr = annArr;
       choice = "ann";
+      break;
+    case "broc":
+      initialize();
+      menu.classList.add("d-none");
+      cArr = brocArr;
+      choice = "broc";
       break;
   }
 }
@@ -435,7 +444,6 @@ function compilingInitialize() {
         () => {
           initialize.classList.remove("fadeOut_initialize");
           set();
-          initialize.classList.add("d-none");
           alertOver = true;
         },
         500,
@@ -458,19 +466,50 @@ function compile() {
     case "ann":
       cArr = undefined;
       story = [
-        `Hello, dear ${output[0]}! It is our ${output[1]} pleasure to welcome you aboard Flight ${output[2]}, from ${output[3]} to ${output[4]}. We will be ${output[5]} on our ${output[6]} Flagship Airplane, the ${output[7]}. Now pay attention as our ${output[8]} will go through a ${annArr[9]} safety ${output[10]}. We are currently on board a ${output[11]} ${output[12]}. There are ${output[13]} exits on board. ${output[14]} by the tail, ${output[15]} over the ${output[16]}, and ${output[17]} by the ${output[18]}. In the case of an emergency, please do not ${output[19]}. ${output[20]} make your way to the nearest exit, and leave all of your ${output[21]} behind. The ${output[22]} opens by ${output[23]} on the top and bottom ${output[24]}. Inflatable ${output[25]} will extend, and you may dismount the ${output[26]}. In the case of a ${output[27]} landing, inflatable ${output[26]} will open and will ${output[28]} life rafts. Underneath your seat there is also a life jacket, which you can ${output[29]} by ${output[30]} into the tube, or pulling on the ${output[31]}. Infants have a special life jacket. Remember to always ${output[32]} yourself before ${output[32]}ing others. There is a safety brochure in the back of the ${output[33]} in front of you. We ${output[34]} you for ${output[35]} to fly ${output[36]}.`,
+        `Hello, dear ${output[0]}! It is our ${output[1]} pleasure to welcome you aboard Flight ${output[2]}, from ${output[3]} to ${output[4]}. We will be ${output[5]} on our ${output[6]} Flagship Airplane, the ${output[7]}. Now pay attention as our ${output[8]} will go through a safety ${output[10]}. We are currently on board a ${output[11]} ${output[12]}. There are ${output[13]} exits on board. ${output[14]} by the tail, ${output[15]} over the ${output[16]}, and ${output[17]} by the ${output[18]}. In the case of an emergency, please do not ${output[19]}. ${output[20]} make your way to the nearest exit, and leave all of your ${output[21]} behind. The ${output[22]} opens by ${output[23]} on the top and bottom ${output[24]}. Inflatable ${output[25]} will extend, and you may dismount the ${output[26]}. In the case of a ${output[27]} landing, inflatable ${output[26]} will open and will ${output[28]} life rafts. Underneath your seat there is also a life jacket, which you can ${output[29]} by ${output[30]} into the tube, or pulling on the ${output[31]}. Infants have a special life jacket. Remember to always ${output[32]} yourself before ${output[32]}ing others. There is a safety brochure in the back of the ${output[33]} in front of you. We ${output[34]} you for ${output[35]} to fly ${output[36]}.`,
         "Boarding Safety Announcement",
       ];
       loadContent(story);
+      break;
+    case "broc":
+      cArr = undefined;
+      story = [
+        `${output[0]} ${output[1]} ${output[2]} ${output[3]} ${output[4]} ${output[5]}.`,
+        "Broccoli Cheddar Soup",
+      ];
+      loadContent(story);
+      break;
   }
   output = [];
-  console.log(annArr, output, story);
 }
+
+function talk(arg) {
+  console.log(arg);
+  // Create a SpeechSynthesisUtterance
+  const utterance = new SpeechSynthesisUtterance(arg.toString());
+
+  // Select a voice
+  const voices = speechSynthesis.getVoices();
+  utterance.voice = voices[0]; // Choose a specific voice
+
+  // Speak the text
+  speechSynthesis.speak(utterance);
+}
+
 function loadContent(story) {
-  console.log("loading content");
   let content = document.getElementById("content");
-  content.innerText = story[0];
+  content.classList.remove("d-none");
   let h1 = document.createElement("h1");
   h1.textContent = story[1];
-  content.insertAdjacentHTML("afterbegin", h1);
+  let p = document.createElement("p");
+  p.textContent = story[0];
+  console.log(story[0].toString());
+  let button = document.createElement("button");
+  button.classList.add("speakButton");
+  button.setAttribute("onclick", `talk("${story[0].toString()}")`);
+  button.textContent = "Read Aloud";
+  console.log(button);
+  content.append(h1);
+  content.append(p);
+  content.append(button);
 }
