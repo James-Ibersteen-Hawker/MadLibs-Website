@@ -246,8 +246,40 @@ function progressor(dist) {
   progress.classList.remove("d-none");
   let width = 100;
   let unit = width / cArr.length;
+  let style = document.getElementsByTagName("STYLE")[0];
+  if (dist == 0) {
+    let keyframes = `
+    @keyframes moveOver {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(${unit}%);
+      }
+    }
+    `;
+    let moveClass = `
+      .progressMove {
+        animation-name: moveOver;
+        animation-fill-mode: forwards;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: 1;
+      }
+    `;
+    style.append(keyframes);
+    style.append(moveClass);
+  }
   let progressor = document.getElementById("progressor");
-  progressor.setAttribute("style", `left: -${100 - unit * dist}%;`);
+  progressor.classList.add("progressMove");
+  setTimeout(
+    () => {
+      progressor.setAttribute("style", `left: -${100 - unit * dist}%;`);
+      progressor.classList.remove("progressMove");
+    },
+    500,
+    progressor
+  );
 }
 ///////////////////////////////////////////////////////////////
 
@@ -457,6 +489,10 @@ function compilingInitialize() {
 }
 function compile() {
   console.log("compiling");
+  let style = document.getElementsByTagName("STYLE")[0];
+  let bg = document.getElementById("bg");
+  bg.innerHTML = "";
+  style.remove();
   index = 0;
   questionBG();
   compilingInitialize();
