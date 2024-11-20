@@ -61,7 +61,7 @@ let annArr = [
   words[7],
   "airline name",
 ];
-let brocArr = [words[1], words[2], words[3], words[4], words[1], words[5]];
+let brocArr = [words[1]];
 let fConsole = document.getElementById("no-console");
 window.addEventListener("keyup", function (event) {
   if (event.key == "Enter" || event.keyCode == 13) {
@@ -75,8 +75,6 @@ window.onload = function startUp() {
   set();
   let content = document.getElementById("content");
   content.classList.add("d-none");
-  // ellipsis("Initializing");
-  // prompter(annArr, announcementText);
 };
 let article = function (item) {
   let vowels = ["a", "e", "i", "o", "u"];
@@ -89,7 +87,6 @@ function log(arg) {
 }
 function prompter(index) {
   promptOpen = true;
-  console.log("prompting");
   document.getElementById("header").textContent = `Please enter ${article(
     cArr[index]
   )} ${cArr[index]}`;
@@ -285,7 +282,6 @@ function progressor(dist) {
 
 function initialize() {
   alertOver = false;
-  console.log("initializing");
   let initialize = document.getElementById("initializing");
   initialize.classList.remove("d-none");
   initialize.classList.add("fadeIn_initialize");
@@ -455,11 +451,22 @@ function go(pick) {
       cArr = brocArr;
       choice = "broc";
       break;
+    case "job":
+      initialize();
+      menu.classList.add("d-none");
+      cArr = undefined;
+      choice = "job";
+      break;
+    case "news":
+      initialize();
+      menu.classList.add("d-none");
+      cArr = undefined;
+      choice = "news";
+      break;
   }
 }
 function compilingInitialize() {
   alertOver = false;
-  console.log("still compiling!");
   let initialize = document.getElementById("initializing");
   let InP = document.getElementById("InP");
   InP.textContent = "Compiling Responses";
@@ -488,7 +495,6 @@ function compilingInitialize() {
   ellipsis("Compiling Responses");
 }
 function compile() {
-  console.log("compiling");
   let style = document.getElementsByTagName("STYLE")[0];
   let bg = document.getElementById("bg");
   bg.innerHTML = "";
@@ -497,7 +503,6 @@ function compile() {
   questionBG();
   compilingInitialize();
   let story;
-  console.log(choice);
   switch (choice) {
     case "ann":
       cArr = undefined;
@@ -509,18 +514,23 @@ function compile() {
       break;
     case "broc":
       cArr = undefined;
-      story = [
-        `${output[0]} ${output[1]} ${output[2]} ${output[3]} ${output[4]} ${output[5]}.`,
-        "Broccoli Cheddar Soup",
-      ];
+      story = [`${output[0]}.`, "Broccoli Cheddar Soup"];
+      loadContent(story);
+      break;
+    case "job":
+      cArr = undefined;
+      story = [`story text`, "Job Interview"];
+      loadContent(story);
+      break;
+    case "news":
+      cArr = undefined;
+      story = [``, "Olympic News Reporter"];
       loadContent(story);
       break;
   }
   output = [];
 }
-
 function talk(arg) {
-  console.log(arg);
   // Create a SpeechSynthesisUtterance
   const utterance = new SpeechSynthesisUtterance(arg.toString());
 
@@ -531,7 +541,6 @@ function talk(arg) {
   // Speak the text
   speechSynthesis.speak(utterance);
 }
-
 function loadContent(story) {
   let content = document.getElementById("content");
   content.classList.remove("d-none");
@@ -539,13 +548,19 @@ function loadContent(story) {
   h1.textContent = story[1];
   let p = document.createElement("p");
   p.textContent = story[0];
-  console.log(story[0].toString());
   let button = document.createElement("button");
   button.classList.add("speakButton");
   button.setAttribute("onclick", `talk("${story[0].toString()}")`);
   button.textContent = "Read Aloud";
-  console.log(button);
+  let link = document.createElement("span");
+  link.textContent = "Home";
+  link.setAttribute("onclick", "location.reload()");
+  let bottom = document.createElement("div");
+  bottom.classList.add("bottom");
   content.append(h1);
-  content.append(p);
+  // content.setAttribute("style", `padding-top: ${h1.offsetHeight + 10}px;`);
   content.append(button);
+  content.append(p);
+  bottom.append(link);
+  content.append(bottom);
 }
