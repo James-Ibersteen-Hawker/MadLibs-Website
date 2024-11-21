@@ -87,9 +87,7 @@ function log(arg) {
 }
 function prompter(index) {
   promptOpen = true;
-  document.getElementById("header").textContent = `Please enter ${article(
-    cArr[index]
-  )} ${cArr[index]}`;
+  document.getElementById("header").textContent = `${cArr[index]}`;
   document.getElementById("textInp").value = "";
   document.getElementById("counter").innerText = `${index + 1} / ${
     cArr.length
@@ -97,10 +95,21 @@ function prompter(index) {
 }
 function entered() {
   promptOpen = false;
-  let value = document.getElementById("textInp").value;
-  output.push(value.toString());
-  index++;
-  showUp();
+  let button = document.getElementById("submit");
+  button.classList.add("black_border");
+  setTimeout(
+    () => {
+      button.classList.remove("black_border");
+      let value = document.getElementById("textInp").value;
+      output.push(value.toString());
+      index++;
+      showUp();
+    },
+    200,
+    output,
+    index,
+    button
+  );
 }
 function showUp() {
   let prompt = document.getElementById("prompt");
@@ -111,7 +120,7 @@ function showUp() {
       prompt.classList.remove("leave");
       openPrompt();
     },
-    1000,
+    750,
     prompt
   );
 }
@@ -227,7 +236,7 @@ function openPrompt() {
       prompt.classList.remove("zoomIn_prompt");
       prompt.setAttribute("style", "opacity: 1;");
     },
-    500,
+    350,
     prompt
   );
   if (index < cArr.length) {
