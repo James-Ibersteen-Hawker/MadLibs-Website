@@ -26,7 +26,7 @@ let words = {
 
 let annArr = [
   words[8],
-  words[7],
+  "adjective ending in -est",
   words[5],
   words[6],
   words[6],
@@ -37,9 +37,11 @@ let annArr = [
   words[5],
   words[5],
   words[2],
-  words[3],
+  `${words[3]} (Capital first letter)`,
   words[8],
   words[7],
+  words[8],
+  words[1],
   words[8],
   "air-related verb",
   words[7],
@@ -516,7 +518,7 @@ function compile() {
     case "ann":
       cArr = undefined;
       story = [
-        `Hello dear ${output[0]}! It is our ${output[1]} to welcome you aboard Flight ${output[2]}, from ${output[3]}) to ${output[4]}. Now please pay attention as our ${output[5]} will go through a safety presentation. We are currently on board our Flagship airplane, the ${output[6]}. There are ${output[7]} exits on board. ${output[8]} by the tail, ${output[9]} over the wings, and ${output[10]} by the nose. In the case of an emergency, please do not ${output[11]}. ${output[12]} make your way to the nearest exit, and leave all of your ${output[13]} behind. The door opens by ${output[14]} on the top and bottom handles. Inflatable ${output[15]} will extend, and you will be able to dismount the plane. In the case of a ${output[16]} landing, life ${output[17]} will inflate. Underneath your seat there is a life jacket, which you can ${output[18]} by ${output[19]} into the tube, or by pulling on the cord. Infants have a special life jacket. Always remember to ${output[20]} yourself before ${output[21]} others. There is a safety brochure in the back of the ${output[22]} in front of you. We thank you for ${output[23]} to fly ${output[24]}.`,
+        `Hello dear ${output[0]}! It is our ${output[1]} pleasure to welcome you aboard Flight ${output[2]}, from ${output[3]} to ${output[4]}. Now please pay attention as our ${output[5]} will go through a safety presentation. We are currently on board our Flagship airplane, the ${output[6]}. There are ${output[7]} exits on board. ${output[8]} by the tail, ${output[9]} over the wings, and ${output[10]} by the nose. In the case of an emergency, please do not ${output[11]}. ${output[12]} make your way to the nearest exit, and leave all of your ${output[13]} behind. The door opens by ${output[14]} on the top and bottom handles. Inflatable ${output[15]} will extend, and you will be able to dismount the plane. In the case of a ${output[16]} landing, life ${output[17]} will inflate. Underneath your seat there is a life jacket, which you can ${output[18]} by ${output[19]} into the tube, or by pulling on the cord. Infants have a special life jacket. Always remember to ${output[20]} yourself before ${output[21]} others. There is a safety brochure in the back of the ${output[22]} in front of you. We thank you for ${output[23]} to fly ${output[24]}.`,
         "Boarding Safety Announcement",
       ];
       loadContent(story);
