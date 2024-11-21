@@ -8,6 +8,7 @@ let output = [];
 let choice;
 let alertOver = false;
 let promptOpen = false;
+let enterPressed = false;
 let words = {
   1: "noun",
   2: "verb",
@@ -22,50 +23,48 @@ let words = {
   11: "name",
   12: "facial feature",
 };
+
 let annArr = [
   words[8],
-  words[9],
-  words[5],
-  words[6],
-  words[6],
   words[7],
-  words[4],
+  words[5],
+  words[6],
+  words[6],
+  words[8],
   words[11],
-  words[8],
-  words[4],
-  words[1],
-  "airplane manufacturer name",
-  "three digit number",
   words[5],
   words[5],
   words[5],
-  words[8],
   words[5],
-  words[12],
   words[2],
   words[3],
   words[8],
-  words[1],
   words[7],
   words[8],
-  words[8],
-  words[1],
-  words[1],
   "air-related verb",
-  words[2],
   words[7],
-  words[1],
   words[2],
+  "Previous verb -ing",
   words[1],
-  words[2],
   words[7],
   "airline name",
 ];
 let brocArr = [words[1]];
 let fConsole = document.getElementById("no-console");
+window.addEventListener("keydown", function (event) {
+  if (event.key == "Enter" || event.keyCode == 13) {
+    if (cArr && promptOpen == true && enterPressed == false) {
+      let button = document.getElementById("submit");
+      button.classList.add("black_border");
+      enterPressed = true;
+    }
+  }
+});
 window.addEventListener("keyup", function (event) {
   if (event.key == "Enter" || event.keyCode == 13) {
     if (cArr && promptOpen == true) {
+      let button = document.getElementById("submit");
+      button.classList.remove("black_border");
       entered();
     }
   }
@@ -82,6 +81,13 @@ let article = function (item) {
   vowels.includes(item[0]) ? (art = "an") : (art = "a");
   return art;
 };
+function capital(item) {
+  console.log(item);
+  let letters = item.split("");
+  letters[0] = letters[0].toUpperCase();
+  letters.join();
+  return letters;
+}
 function log(arg) {
   fConsole.textContent = arg;
 }
@@ -89,27 +95,16 @@ function prompter(index) {
   promptOpen = true;
   document.getElementById("header").textContent = `${cArr[index]}`;
   document.getElementById("textInp").value = "";
-  document.getElementById("counter").innerText = `${index + 1} / ${
-    cArr.length
-  }`;
+  // document.getElementById("counter").innerText = `${index + 1} / ${
+  //   cArr.length
+  // }`;
 }
 function entered() {
   promptOpen = false;
-  let button = document.getElementById("submit");
-  button.classList.add("black_border");
-  setTimeout(
-    () => {
-      button.classList.remove("black_border");
-      let value = document.getElementById("textInp").value;
-      output.push(value.toString());
-      index++;
-      showUp();
-    },
-    200,
-    output,
-    index,
-    button
-  );
+  let value = document.getElementById("textInp").value;
+  output.push(value.toString());
+  index++;
+  showUp();
 }
 function showUp() {
   let prompt = document.getElementById("prompt");
@@ -235,6 +230,7 @@ function openPrompt() {
     () => {
       prompt.classList.remove("zoomIn_prompt");
       prompt.setAttribute("style", "opacity: 1;");
+      enterPressed = false;
     },
     350,
     prompt
@@ -252,6 +248,7 @@ function progressor(dist) {
   progress.classList.remove("d-none");
   let width = 100;
   let unit = width / cArr.length;
+  let percent = Math.round(unit) * dist;
   let style = document.getElementsByTagName("STYLE")[0];
   if (dist == 0) {
     let keyframes = `
@@ -278,10 +275,13 @@ function progressor(dist) {
   }
   let progressor = document.getElementById("progressor");
   progressor.classList.add("progressMove");
+  let percentage = document.getElementById("percentage");
   setTimeout(
     () => {
       progressor.setAttribute("style", `left: -${100 - unit * dist}%;`);
       progressor.classList.remove("progressMove");
+      // percentage.textContent = `${percent}%`;
+      percentage.textContent = `${index + 1} / ${cArr.length}`;
     },
     500,
     progressor
@@ -516,7 +516,7 @@ function compile() {
     case "ann":
       cArr = undefined;
       story = [
-        `Hello, dear ${output[0]}! It is our ${output[1]} pleasure to welcome you aboard Flight ${output[2]}, from ${output[3]} to ${output[4]}. We will be ${output[5]} on our ${output[6]} Flagship Airplane, the ${output[7]}. Now pay attention as our ${output[8]} will go through a safety ${output[10]}. We are currently on board a ${output[11]} ${output[12]}. There are ${output[13]} exits on board. ${output[14]} by the tail, ${output[15]} over the ${output[16]}, and ${output[17]} by the ${output[18]}. In the case of an emergency, please do not ${output[19]}. ${output[20]} make your way to the nearest exit, and leave all of your ${output[21]} behind. The ${output[22]} opens by ${output[23]} on the top and bottom ${output[24]}. Inflatable ${output[25]} will extend, and you may dismount the ${output[26]}. In the case of a ${output[27]} landing, inflatable ${output[26]} will open and will ${output[28]} life rafts. Underneath your seat there is also a life jacket, which you can ${output[29]} by ${output[30]} into the tube, or pulling on the ${output[31]}. Infants have a special life jacket. Remember to always ${output[32]} yourself before ${output[32]}ing others. There is a safety brochure in the back of the ${output[33]} in front of you. We ${output[34]} you for ${output[35]} to fly ${output[36]}.`,
+        `Hello dear ${output[0]}! It is our ${output[1]} to welcome you aboard Flight ${output[2]}, from ${output[3]}) to ${output[4]}. Now please pay attention as our ${output[5]} will go through a safety presentation. We are currently on board our Flagship airplane, the ${output[6]}. There are ${output[7]} exits on board. ${output[8]} by the tail, ${output[9]} over the wings, and ${output[10]} by the nose. In the case of an emergency, please do not ${output[11]}. ${output[12]} make your way to the nearest exit, and leave all of your ${output[13]} behind. The door opens by ${output[14]} on the top and bottom handles. Inflatable ${output[15]} will extend, and you will be able to dismount the plane. In the case of a ${output[16]} landing, life ${output[17]} will inflate. Underneath your seat there is a life jacket, which you can ${output[18]} by ${output[19]} into the tube, or by pulling on the cord. Infants have a special life jacket. Always remember to ${output[20]} yourself before ${output[21]} others. There is a safety brochure in the back of the ${output[22]} in front of you. We thank you for ${output[23]} to fly ${output[24]}.`,
         "Boarding Safety Announcement",
       ];
       loadContent(story);
