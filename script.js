@@ -46,7 +46,6 @@ let annArr = [
   "air-related verb",
   words[7],
   words[2],
-  "Previous verb -ing",
   words[1],
   words[7],
   "airline name",
@@ -74,8 +73,6 @@ window.addEventListener("keyup", function (event) {
 window.onload = function startUp() {
   questionBG(false);
   set();
-  let content = document.getElementById("content");
-  content.classList.add("d-none");
 };
 let article = function (item) {
   let vowels = ["a", "e", "i", "o", "u"];
@@ -383,6 +380,8 @@ function set() {
   prompt.classList.add("d-none");
   let progress = document.getElementById("progress");
   progress.classList.add("d-none");
+  let content = document.getElementById("content");
+  content.classList.add("d-none");
 }
 function toStories() {
   let open = document.getElementById("opening");
@@ -493,7 +492,7 @@ function compilingInitialize(story) {
       setTimeout(
         () => {
           initialize.classList.remove("fadeOut_initialize");
-          set();
+          initialize.classList.add("d-none");
           loadContent(story);
           alertOver = true;
         },
@@ -518,7 +517,7 @@ function compile() {
     case "ann":
       cArr = undefined;
       story = [
-        `Hello dear ${output[0]}! It is our ${output[1]} pleasure to welcome you aboard Flight ${output[2]}, from ${output[3]} to ${output[4]}. Now please pay attention as our ${output[5]} will go through a safety presentation. We are currently on board our Flagship airplane, the ${output[6]}. There are ${output[7]} exits on board. ${output[8]} by the tail, ${output[9]} over the wings, and ${output[10]} by the nose. In the case of an emergency, please do not ${output[11]}. ${output[12]} make your way to the nearest exit, and leave all of your ${output[13]} behind. The door opens by ${output[14]} on the top and bottom handles. Inflatable ${output[15]} will extend, and you will be able to dismount the plane. In the case of a ${output[16]} landing, life ${output[17]} will inflate. Underneath your seat there is a life jacket, which you can ${output[18]} by ${output[19]} into the tube, or by pulling on the cord. Infants have a special life jacket. Always remember to ${output[20]} yourself before ${output[21]} others. There is a safety brochure in the back of the ${output[22]} in front of you. We thank you for ${output[23]} to fly ${output[24]}.`,
+        `Hello dear ${output[0]}! It is our ${output[1]} pleasure to welcome you aboard Flight ${output[2]}, from ${output[3]} to ${output[4]}. Now please pay attention as our ${output[5]} will go through a safety presentation. We are currently on board our Flagship airplane, the ${output[6]}. There are ${output[7]} exits on board. ${output[8]} by the tail, ${output[9]} over the wings, and ${output[10]} by the nose. In the case of an emergency, please do not ${output[11]}. ${output[12]} make your way to the nearest exit, and leave all of your ${output[13]} behind. The door opens by ${output[14]} on the top and bottom handles. Inflatable ${output[15]} will extend, and you will be able to dismount the plane. In the case of a ${output[16]} landing, life ${output[17]} will inflate. Underneath your seat there is a life jacket, which you can ${output[18]} by ${output[19]} into the tube, or by pulling on the cord. Infants have a special life jacket. Always remember to ${output[20]} yourself before helping others. There is a safety brochure in the back of the ${output[21]} in front of you. We thank you for ${output[22]} to fly ${output[23]}.`,
         "Boarding Safety Announcement",
       ];
       break;
@@ -535,6 +534,7 @@ function compile() {
       story = [``, "Olympic News Reporter"];
       break;
   }
+  set();
   compilingInitialize(story);
   output = [];
 }
