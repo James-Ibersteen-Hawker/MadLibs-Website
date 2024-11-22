@@ -538,6 +538,7 @@ h1 {
     margin-right: auto;
     position: relative;
     top: 0;
+    font-size: 50px;
   }
   h1::after {
     content: "";
@@ -545,7 +546,7 @@ h1 {
     left: 50%;
     bottom: 0;
     height: 5px;
-    width: 90%;
+    width: 100%;
     background: var(--red);
     transform: translateX(-50%);
   }
