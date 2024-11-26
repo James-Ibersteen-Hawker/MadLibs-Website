@@ -51,6 +51,26 @@ let annArr = [
   "airline name",
 ];
 let brocArr = [words[1]];
+let newsArr = [
+  "Sub 10 number",
+  words[9],
+  words[9],
+  words[9],
+  words[5],
+  words[1],
+  words[2],
+  words[5],
+  "noun / plural noun",
+  words[4],
+  words[4],
+  words[1],
+  "verb ending in -tion (creaTION)",
+  words[7],
+  words[5],
+  "position {side, bottom, top, etc.",
+  "day of the week",
+  words[7],
+];
 let fConsole = document.getElementById("no-console");
 window.addEventListener("keydown", function (event) {
   if (event.key == "Enter" || event.keyCode == 13) {
@@ -101,9 +121,24 @@ function prompter(index) {
 function entered() {
   promptOpen = false;
   let value = document.getElementById("textInp").value;
-  output.push(value.toString());
-  index++;
-  showUp();
+  if (value != "") {
+    output.push(value.toString());
+    index++;
+    showUp();
+  } else {
+    let myInput = document.getElementById("textInp");
+    myInput.classList.add("redden");
+    promptOpen = true;
+    enterPressed = false;
+    console.log("wuz here");
+    window.setTimeout(
+      () => {
+        myInput.classList.remove("redden");
+      },
+      500,
+      myInput
+    );
+  }
 }
 function showUp() {
   let prompt = document.getElementById("prompt");
@@ -470,7 +505,7 @@ function go(pick) {
     case "news":
       initialize();
       menu.classList.add("d-none");
-      cArr = undefined;
+      cArr = newsArr;
       choice = "news";
       break;
   }
@@ -527,11 +562,35 @@ function compile() {
       break;
     case "job":
       cArr = undefined;
-      story = [`story text`, "Job Interview"];
+      story = ["text", "Job Interview"];
       break;
     case "news":
       cArr = undefined;
-      story = [``, "Olympic News Reporter"];
+      story = [
+        `Welcome back to the Olympics, an event that takes place every ${
+          output[0]
+        } years! A contest of the ${output[1]}, ${output[2]}, and the ${
+          output[3]
+        }! The contestants will compete in ${output[4]} challenges: 
+There is the ${output[5]} race, wherein contestants must ${
+          output[6]
+        } with ${article(output[5])}${output[5]} on a spoon.
+There is the ${output[7]} meter dash for those with ${output[8]}.
+There is the ${output[9]} jump and the ${output[10]} jump. 
+There is the ${output[11]} vault jump. 
+There is the ${output[12]} competition. 
+And finally, there is the ${output[13]} competition!
+
+Over the course of ${
+          output[14]
+        } weeks these contestants will participate in these challenges, with only one person coming out on ${
+          output[15]
+        }. The first events will begin next ${output[16]}, starting with the ${
+          output[17]
+        } of the Olympic Torch!
+`,
+        "Olympic News Reporter",
+      ];
       break;
   }
   set();
