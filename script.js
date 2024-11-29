@@ -23,7 +23,25 @@ let words = {
   11: "name",
   12: "facial feature",
 };
-
+let brocArr = [
+  words[5],
+  words[1],
+  "type of spice",
+  "unit of measurement",
+  "number bigger than 1",
+  "plural vegetable / fruit",
+  "kitchen implement",
+  words[5],
+  "plural unit of time",
+  words[7],
+  words[8],
+  words[2],
+  words[2],
+  "number bigger than 1",
+  words[2],
+  "number bigger than 1",
+  words[2],
+];
 let annArr = [
   words[8],
   "adjective ending in -est",
@@ -50,7 +68,6 @@ let annArr = [
   words[7],
   "airline name",
 ];
-let brocArr = [words[1]];
 let newsArr = [
   "Sub 10 number",
   words[9],
@@ -549,16 +566,34 @@ function compile() {
   questionBG();
   let story;
   switch (choice) {
+    case "broc":
+      cArr = undefined;
+      story = [
+        `How to make Broccoli Cheddar Soup:
+<ul> - Ingredients:
+<li> - ${output[0]} Broccoli Stalks</li>
+<li> - One ${output[1]} of broth</li>
+<li> - A pinch of ${output[2]}</li>
+<li> - One ${output[3]} of grated cheddar</li>
+<li> - ${output[4]} ${output[5]}</li>
+<li> - One cast-iron ${output[6]}</li>
+</ul>
+<br>
+Preparation Time:<br>
+${output[7]} minutes to prepare ingredients<br>
+2 ${output[8]} to cook<br>
+<br>
+Instructions:<br>
+Begin by ${output[9]} the ${output[10]} off of the broccoli. Then, ${output[11]} the rest of the ${output[5]}. Pour the ${output[1]}) of broth into the cast iron ${output[6]}. Let the broth ${output[12]} for approximately ${output[13]} minutes. Then, add the ${output[5]}. Pour in the grated cheddar. Let the soup ${output[14]} for ${output[15]} more minutes. Add the broccoli. Let the soup ${output[16]} for 30 minutes. Serve!`,
+        "Broccoli Cheddar Soup",
+      ];
+      break;
     case "ann":
       cArr = undefined;
       story = [
         `Hello dear ${output[0]}! It is our ${output[1]} pleasure to welcome you aboard Flight ${output[2]}, from ${output[3]} to ${output[4]}. Now please pay attention as our ${output[5]} will go through a safety presentation. We are currently on board our Flagship airplane, the ${output[6]}. There are ${output[7]} exits on board. ${output[8]} by the tail, ${output[9]} over the wings, and ${output[10]} by the nose. In the case of an emergency, please do not ${output[11]}. ${output[12]} make your way to the nearest exit, and leave all of your ${output[13]} behind. The door opens by ${output[14]} on the top and bottom handles. Inflatable ${output[15]} will extend, and you will be able to dismount the plane. In the case of a ${output[16]} landing, life ${output[17]} will inflate. Underneath your seat there is a life jacket, which you can ${output[18]} by ${output[19]} into the tube, or by pulling on the cord. Infants have a special life jacket. Always remember to ${output[20]} yourself before helping others. There is a safety brochure in the back of the ${output[21]} in front of you. We thank you for ${output[22]} to fly ${output[23]}.`,
         "Boarding Safety Announcement",
       ];
-      break;
-    case "broc":
-      cArr = undefined;
-      story = [`${output[0]}.`, "Broccoli Cheddar Soup"];
       break;
     case "job":
       cArr = undefined;
@@ -614,7 +649,7 @@ function loadContent(story) {
   let h1 = document.createElement("h1");
   h1.textContent = story[1];
   let p = document.createElement("p");
-  p.textContent = story[0];
+  p.innerHTML = story[0];
   let button = document.createElement("button");
   button.classList.add("speakButton");
   button.setAttribute("onclick", `talk("${story[0].toString()}")`);
@@ -625,7 +660,6 @@ function loadContent(story) {
   let bottom = document.createElement("div");
   bottom.classList.add("bottom");
   content.append(h1);
-  // content.setAttribute("style", `padding-top: ${h1.offsetHeight + 10}px;`);
   content.append(button);
   content.append(p);
   bottom.append(link);
