@@ -584,7 +584,7 @@ ${output[7]} minutes to prepare ingredients<br>
 2 ${output[8]} to cook<br>
 <br>
 Instructions:<br>
-Begin by ${output[9]} the ${output[10]} off of the broccoli. Then, ${output[11]} the rest of the ${output[5]}. Pour the ${output[1]}) of broth into the cast iron ${output[6]}. Let the broth ${output[12]} for approximately ${output[13]} minutes. Then, add the ${output[5]}. Pour in the grated cheddar. Let the soup ${output[14]} for ${output[15]} more minutes. Add the broccoli. Let the soup ${output[16]} for 30 minutes. Serve!`,
+Begin by ${output[9]} the ${output[10]} off of the broccoli. Then, ${output[11]} the rest of the ${output[5]}. Pour the ${output[1]} of broth into the cast iron ${output[6]}. Let the broth ${output[12]} for approximately ${output[13]} minutes. Then, add the ${output[5]}. Pour in the grated cheddar. Let the soup ${output[14]} for ${output[15]} more minutes. Add the broccoli. Let the soup ${output[16]} for 30 minutes. Serve!`,
         "Broccoli Cheddar Soup",
       ];
       break;
