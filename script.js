@@ -68,6 +68,29 @@ let annArr = [
   words[7],
   "airline name",
 ];
+let jobArr = [
+  "verb ending in -ed",
+  "honorific",
+  "last name",
+  "name",
+  "plural unit of time",
+  "school type",
+  words[5],
+  "name",
+  words[7],
+  words[2],
+  words[5],
+  "plural unit of time",
+  words[4],
+  "degree type (i.e., a Master's or Bachelor's",
+  "career field",
+  words[5],
+  "adjective ending in -ed",
+  words[5],
+  words[3],
+  words[5],
+  words[5],
+];
 let newsArr = [
   "Sub 10 number",
   words[9],
@@ -118,7 +141,6 @@ let article = function (item) {
   return art;
 };
 function capital(item) {
-  console.log(item);
   let letters = item.split("");
   letters[0] = letters[0].toUpperCase();
   letters.join();
@@ -147,7 +169,6 @@ function entered() {
     myInput.classList.add("redden");
     promptOpen = true;
     enterPressed = false;
-    console.log("wuz here");
     window.setTimeout(
       () => {
         myInput.classList.remove("redden");
@@ -516,7 +537,7 @@ function go(pick) {
     case "job":
       initialize();
       menu.classList.add("d-none");
-      cArr = undefined;
+      cArr = jobArr;
       choice = "job";
       break;
     case "news":
@@ -597,7 +618,41 @@ Begin by ${output[9]} the ${output[10]} off of the broccoli. Then, ${output[11]}
       break;
     case "job":
       cArr = undefined;
-      story = ["text", "Job Interview"];
+      story = [
+        `I ${output[0]} into the interview room.<br>
+        “Good morning, ${output[1]} ${output[2]},” said Mr ${
+          output[3]
+        }, the interviewer. “We have gathered here today to interview you for your new job. Let’s start with your education. How many ${
+          output[4]
+        } have you spent in a ${output[5]}?”<br>
+        “${output[6]} ${output[4]}, sir,” I answered. “I was taught at the ${
+          output[7]
+        } institute of ${output[8]}. Every day I had to ${
+          output[9]
+        } to school, and the trip was ${output[10]} ${output[11]} long.”<br>
+
+“Very ${output[12]}, very ${output[12]}. Let’s move onto your credentials.”<br>
+
+“I have a ${output[13]} in ${output[14]}, and I have worked in ${
+          output[15]
+        } other jobs before this one. I am very ${output[16]}.”<br>
+
+“Good! At what age did you get your first job?”<br>
+
+“At the age of ${output[17]},” I responded.<br>
+
+“Always good to have an experienced employee,” said Mr. ${
+          output[3]
+        }. “What about your family?”<br>
+
+“I am ${output[18]} married, for ${output[19]} years. I have ${output[20]} ${
+          output[19] > 1 ? "kids" : "kid"
+        }.”<br>
+
+“Very good. Welcome to the team!”
+`,
+        "Job Interview",
+      ];
       break;
     case "news":
       cArr = undefined;
