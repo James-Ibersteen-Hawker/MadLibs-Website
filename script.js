@@ -591,7 +591,7 @@ function compile() {
       cArr = undefined;
       story = [
         `How to make Broccoli Cheddar Soup:
-<ul> - Ingredients:
+- Ingredients:<ul>
 <li> - ${output[0]} Broccoli Stalks</li>
 <li> - One ${output[1]} of broth</li>
 <li> - A pinch of ${output[2]}</li>
@@ -664,7 +664,7 @@ Begin by ${output[9]} the ${output[10]} off of the broccoli. Then, ${output[11]}
         }! The contestants will compete in ${output[4]} challenges: 
 There is the ${output[5]} race, wherein contestants must ${
           output[6]
-        } with ${article(output[5])}${output[5]} on a spoon.
+        } with ${article(output[5])} ${output[5]} on a spoon.
 There is the ${output[7]} meter dash for those with ${output[8]}.
 There is the ${output[9]} jump and the ${output[10]} jump. 
 There is the ${output[11]} vault jump. 
